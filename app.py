@@ -12,11 +12,11 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY") 
 
 
-chat_language = os.getenv("INIT_LANGUAGE", default = "zh")
+chat_language = os.getenv("INIT_LANGUAGE", default = "zh-hans")
 	
 MSG_LIST_LIMIT = int(os.getenv("MSG_LIST_LIMIT", default = 20))
 LANGUAGE_TABLE = {
-	  "zh": "哈囉！",
+	  "zh-hans": "你好！",
 	  "en": "Hello!"
 	}
 
@@ -44,7 +44,7 @@ class ChatGPT:
         self.temperature = float(os.getenv("OPENAI_TEMPERATURE", default = 0))
         self.frequency_penalty = float(os.getenv("OPENAI_FREQUENCY_PENALTY", default = 0))
         self.presence_penalty = float(os.getenv("OPENAI_PRESENCE_PENALTY", default = 0.6))
-        self.max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 240))
+        self.max_tokens = int(os.getenv("OPENAI_MAX_TOKENS", default = 2048))
 	
     def get_response(self):
         response = openai.Completion.create(
@@ -59,7 +59,7 @@ class ChatGPT:
         print("AI回答內容：")        
         print(response['choices'][0]['text'].strip())
 
-        print("AI原始回覆資料內容：")      
+        print("AI原始回复资料內容：")      
         print(response)
         
         return response['choices'][0]['text'].strip()
